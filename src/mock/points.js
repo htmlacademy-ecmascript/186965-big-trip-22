@@ -39,7 +39,7 @@ const mockPoints = [
     'dateTo': '2019-03-11T22:00:13.375Z',
     'destination': mockDestinations[4].name,
     'isFavorite': false,
-    'offers': [1, 2, 3, 4],
+    'offers': [1, 2, 3],
     'type': 'ship'
   },
   {
@@ -49,7 +49,7 @@ const mockPoints = [
     'dateTo': '2019-02-11T15:12:13.375Z',
     'destination': mockDestinations[1].name,
     'isFavorite': false,
-    'offers': [2, 3, 5],
+    'offers': [3, 5],
     'type': 'drive'
   },
   {
@@ -59,7 +59,7 @@ const mockPoints = [
     'dateTo': '2019-01-11T11:32:13.375Z',
     'destination': mockDestinations[2].name,
     'isFavorite': false,
-    'offers': [2, 3, 4, 5],
+    'offers': [3, 4, 5],
     'type': 'flight'
   },
   {
@@ -79,7 +79,7 @@ const mockPoints = [
     'dateTo': '2019-11-11T11:22:13.375Z',
     'destination': mockDestinations[4].name,
     'isFavorite': false,
-    'offers': [1, 2, 5],
+    'offers': [1, 5],
     'type': 'sightseeing'
   },
   {
@@ -89,7 +89,7 @@ const mockPoints = [
     'dateTo': '2019-03-11T09:22:13.375Z',
     'destination': mockDestinations[0].name,
     'isFavorite': true,
-    'offers': [2],
+    'offers': [],
     'type': 'restaurant'
   },
 ];

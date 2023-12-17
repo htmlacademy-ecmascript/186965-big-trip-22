@@ -14,15 +14,15 @@ export default class PointsPresenter {
   }
 
   init() {
-    this.boardPoints = [...this.pointsModel.getPoints()];
+    this.tripPoints = [...this.pointsModel.getPoints()];
 
 
     render(new SortView, this.pointsContainer);
     render(this.pointsBoard, this.pointsContainer);
-    render(new PointEditView(), this.pointsBoard.getElement());
+    render(new PointEditView({point: this.tripPoints[0]}), this.pointsBoard.getElement());
 
-    for (let i = 0; i < this.boardPoints.length; i++) {
-      render(new PointView({point: this.boardPoints[i]}), this.pointsBoard.getElement());
+    for (let i = 0; i < this.tripPoints.length; i++) {
+      render(new PointView({point: this.tripPoints[i]}), this.pointsBoard.getElement());
     }
 
   }
