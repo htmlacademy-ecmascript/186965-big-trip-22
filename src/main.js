@@ -11,6 +11,11 @@ import AddNewPointButtonView from './view/add-new-point-button-view.js';
 //Presenter
 import PointsPresenter from './presenter/points-presenter.js';
 
+
+//Model
+import PointsModel from './model/points-model.js';
+
+
 // header
 const pageHeaderElement = document.querySelector('.page-header');
 const tripInfoMainElement = pageHeaderElement.querySelector('.trip-main');
@@ -21,7 +26,11 @@ const siteMainElement = document.querySelector('.page-main');
 const tripControlsElement = document.querySelector('.trip-controls');
 
 const siteTripControlsElement = siteMainElement.querySelector('.trip-events');
-const pointsBoardPresenter = new PointsPresenter({ pointsContainer: siteTripControlsElement });
+
+const pointsModel = new PointsModel();
+
+
+const pointsPresenter = new PointsPresenter({ pointsContainer: siteTripControlsElement, pointsModel });
 
 
 render(new TripInfoContainerView, tripInfoMainElement, RenderPosition.AFTERBEGIN);
@@ -30,4 +39,4 @@ render(new TripCostView, tripInfoMainElement.querySelector('.trip-info'));
 render(new AddNewPointButtonView, tripControlsElement, RenderPosition.AFTEREND);
 render(new FilterView(), filterElement);
 
-pointsBoardPresenter.init();
+pointsPresenter.init();

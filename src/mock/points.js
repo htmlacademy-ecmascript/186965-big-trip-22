@@ -47,7 +47,7 @@ const mockPoints = [
     'basePrice': 500,
     'dateFrom': '2019-07-10T22:55:56.845Z',
     'dateTo': '2019-07-11T11:22:13.375Z',
-    'destination': mockDestinations[5].id,
+    'destination': mockDestinations[1].id,
     'isFavorite': false,
     'offers': [2, 3, 5],
     'type': 'drive'
@@ -57,7 +57,7 @@ const mockPoints = [
     'basePrice': 600,
     'dateFrom': '2019-07-10T22:55:56.845Z',
     'dateTo': '2019-07-11T11:22:13.375Z',
-    'destination': mockDestinations[6].id,
+    'destination': mockDestinations[2].id,
     'isFavorite': false,
     'offers': [2, 3, 4, 5],
     'type': 'flight'
@@ -67,7 +67,7 @@ const mockPoints = [
     'basePrice': 700,
     'dateFrom': '2019-07-10T22:55:56.845Z',
     'dateTo': '2019-07-11T11:22:13.375Z',
-    'destination': mockDestinations[7].id,
+    'destination': mockDestinations[3].id,
     'isFavorite': true,
     'offers': [2],
     'type': 'check-in'
@@ -77,7 +77,7 @@ const mockPoints = [
     'basePrice': 800,
     'dateFrom': '2019-07-10T22:55:56.845Z',
     'dateTo': '2019-07-11T11:22:13.375Z',
-    'destination': mockDestinations[8].id,
+    'destination': mockDestinations[4].id,
     'isFavorite': false,
     'offers': [1, 2, 5],
     'type': 'sightseeing'
@@ -87,7 +87,7 @@ const mockPoints = [
     'basePrice': 900,
     'dateFrom': '2019-07-10T22:55:56.845Z',
     'dateTo': '2019-07-11T11:22:13.375Z',
-    'destination': mockDestinations[9].id,
+    'destination': mockDestinations[0].id,
     'isFavorite': true,
     'offers': [2],
     'type': 'restaurant'
