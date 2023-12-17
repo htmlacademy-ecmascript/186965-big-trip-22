@@ -1,14 +1,33 @@
+import { render, RenderPosition } from './render.js';
+
+// View
 import FilterView from './view/filter-view.js';
+import TripInfoContainerView from './view/trip-info-container-view.js';
+import TripInfoView from './view/trip-info-view.js';
+import TripCostView from './view/trip-cost-view.js';
+import AddNewPointButtonView from './view/add-new-point-button-view.js';
 
-import { render } from './render.js';
 
-import PointsPresenter from './presenter/event-list-presenter.js';
+//Presenter
+import PointsPresenter from './presenter/points-presenter.js';
 
+// header
+const pageHeaderElement = document.querySelector('.page-header');
+const tripInfoMainElement = pageHeaderElement.querySelector('.trip-main');
+
+//main
 const filterElement = document.querySelector('.trip-controls__filters');
 const siteMainElement = document.querySelector('.page-main');
+const tripControlsElement = document.querySelector('.trip-controls');
+
 const siteTripControlsElement = siteMainElement.querySelector('.trip-events');
 const pointsBoardPresenter = new PointsPresenter({ pointsContainer: siteTripControlsElement });
 
+
+render(new TripInfoContainerView, tripInfoMainElement, RenderPosition.AFTERBEGIN);
+render(new TripInfoView, tripInfoMainElement.querySelector('.trip-info'));
+render(new TripCostView, tripInfoMainElement.querySelector('.trip-info'));
+render(new AddNewPointButtonView, tripControlsElement, RenderPosition.AFTEREND);
 render(new FilterView(), filterElement);
 
 pointsBoardPresenter.init();

@@ -3,7 +3,7 @@ import { createElement } from '../render.js';
 const createPointsListTemplate = () => '<ul class="trip-events__list">';
 
 
-export default class PointsListView {
+export default class PointListView {
   getTemplate() {
     return createPointsListTemplate();
   }

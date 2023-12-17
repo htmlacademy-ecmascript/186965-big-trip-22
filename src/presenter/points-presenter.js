@@ -1,12 +1,12 @@
 import SortView from '../view/sort-view.js';
-import PointsListView from '../view/points-list-view.js';
+import PointListView from '../view/point-list-view.js';
 import PointEditView from '../view/point-edit-view.js';
 import PointItemView from '../view/point-view.js';
 
 import {render} from '../render.js';
 
 export default class PointsPresenter {
-  pointsBoard = new PointsListView();
+  pointsBoard = new PointListView();
 
   constructor({ pointsContainer }) {
     this.pointsContainer = pointsContainer;
