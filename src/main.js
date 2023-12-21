@@ -14,6 +14,10 @@ import PointsPresenter from './presenter/points-presenter.js';
 
 //Model
 import PointsModel from './model/points-model.js';
+import OffersModel from './model/offers-model.js';
+import DestinationsModel from './model/destinations-model.js';
+
+import MockService from './mock/service-mock.js';
 
 
 // header
@@ -27,10 +31,19 @@ const tripControlsElement = document.querySelector('.trip-controls');
 
 const siteTripControlsElement = siteMainElement.querySelector('.trip-events');
 
-const pointsModel = new PointsModel();
+
+const mockService = new MockService();
+const pointsModel = new PointsModel(mockService);
+const offersModel = new OffersModel(mockService);
+const destinationsModel = new DestinationsModel(mockService);
 
 
-const pointsPresenter = new PointsPresenter({ pointsContainer: siteTripControlsElement, pointsModel });
+const pointsPresenter = new PointsPresenter({
+  pointsContainer: siteTripControlsElement,
+  pointsModel,
+  offersModel,
+  destinationsModel
+});
 
 
 render(new TripInfoContainerView, tripInfoMainElement, RenderPosition.AFTERBEGIN);

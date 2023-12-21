@@ -87,5 +87,57 @@ export const mockDestinations = [
         'description': 'Boston parliament building'
       }
     ]
-  }
+  },
+  {
+    'id': 6,
+    'description': 'Thailand, officially the Kingdom of Thailand and historically known as Siam, is a country in Southeast Asia on the Indochinese Peninsula. With a population of almost 70 million, it spans 513,120 square kilometres (198,120 sq mi)',
+    'name': 'Thailand',
+    'pictures': [
+      {
+        'src': `https://loremflickr.com/248/152?random=${getRandomNumber(1, 10)}`,
+        'description': 'Thailand parliament building'
+      },
+      {
+        'src': `https://loremflickr.com/248/152?random=${getRandomNumber(1, 10)}`,
+        'description': 'Thailand parliament building'
+      }
+    ]
+  },
+  {
+    'id': 7,
+    'description': 'Berlin is the capital and largest city of Germany by both area and population.',
+    'name': 'Berlin',
+    'pictures': [
+      {
+        'src': `https://loremflickr.com/248/152?random=${getRandomNumber(1, 10)}`,
+        'description': 'Berlin parliament building'
+      },
+      {
+        'src': `https://loremflickr.com/248/152?random=${getRandomNumber(1, 10)}`,
+        'description': 'Berlin parliament building'
+      }
+    ]
+  },
+  {
+    'id': 8,
+    'description': 'Berlin is the capital and largest city of Germany by both area and population.',
+    'name': 'Berlin',
+    'pictures': [
+      {
+        'src': `https://loremflickr.com/248/152?random=${getRandomNumber(1, 10)}`,
+        'description': 'Berlin parliament building'
+      },
+      {
+        'src': `https://loremflickr.com/248/152?random=${getRandomNumber(1, 10)}`,
+        'description': 'Berlin parliament building'
+      }
+    ]
+  },
+  {
+    'id': 9,
+    'description': 'Vienna is the capital, largest city, and one of the nine States of Austria. ',
+    'name': 'Vienna',
+    'pictures': []
+  },
+
 ];

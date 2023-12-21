@@ -1,4 +1,3 @@
-import { mockDestinations } from './destinations.js';
 import { getRandomArrayElement } from '../utils.js';
 
 const mockPoints = [
@@ -7,7 +6,7 @@ const mockPoints = [
     'basePrice': 100,
     'dateFrom': '2019-09-10T11:05:56.845Z',
     'dateTo': '2019-09-11T12:02:13.375Z',
-    'destination': mockDestinations[0].name,
+    'destination': 1,
     'isFavorite': true,
     'offers': [1, 5],
     'type': 'taxi'
@@ -17,7 +16,7 @@ const mockPoints = [
     'basePrice': 200,
     'dateFrom': '2019-07-10T02:15:56.845Z',
     'dateTo': '2019-07-11T14:12:13.375Z',
-    'destination': mockDestinations[1].name,
+    'destination': 2,
     'isFavorite': false,
     'offers': [1, 5, 3],
     'type': 'bus'
@@ -27,9 +26,9 @@ const mockPoints = [
     'basePrice': 300,
     'dateFrom': '2019-06-10T23:05:56.845Z',
     'dateTo': '2019-06-11T16:01:13.375Z',
-    'destination': mockDestinations[3].name,
+    'destination': 3,
     'isFavorite': true,
-    'offers': [1, 2, 3, 4, 5],
+    'offers': [1, 3, 5],
     'type': 'train'
   },
   {
@@ -37,7 +36,7 @@ const mockPoints = [
     'basePrice': 400,
     'dateFrom': '2019-03-10T16:25:56.845Z',
     'dateTo': '2019-03-11T22:00:13.375Z',
-    'destination': mockDestinations[4].name,
+    'destination': 4,
     'isFavorite': false,
     'offers': [1, 2, 3],
     'type': 'ship'
@@ -47,7 +46,7 @@ const mockPoints = [
     'basePrice': 500,
     'dateFrom': '2019-02-10T11:45:56.845Z',
     'dateTo': '2019-02-11T15:12:13.375Z',
-    'destination': mockDestinations[1].name,
+    'destination': 5,
     'isFavorite': false,
     'offers': [3, 5],
     'type': 'drive'
@@ -57,7 +56,7 @@ const mockPoints = [
     'basePrice': 600,
     'dateFrom': '2019-01-10T21:10:56.845Z',
     'dateTo': '2019-01-11T11:32:13.375Z',
-    'destination': mockDestinations[2].name,
+    'destination': 1,
     'isFavorite': false,
     'offers': [3, 4, 5],
     'type': 'flight'
@@ -67,7 +66,7 @@ const mockPoints = [
     'basePrice': 700,
     'dateFrom': '2019-12-10T10:55:56.845Z',
     'dateTo': '2019-12-11T19:22:13.375Z',
-    'destination': mockDestinations[3].name,
+    'destination': 2,
     'isFavorite': true,
     'offers': [2],
     'type': 'check-in'
@@ -77,7 +76,7 @@ const mockPoints = [
     'basePrice': 800,
     'dateFrom': '2019-11-10T16:55:56.845Z',
     'dateTo': '2019-11-11T11:22:13.375Z',
-    'destination': mockDestinations[4].name,
+    'destination': 3,
     'isFavorite': false,
     'offers': [1, 5],
     'type': 'sightseeing'
@@ -87,7 +86,7 @@ const mockPoints = [
     'basePrice': 900,
     'dateFrom': '2019-03-10T12:55:56.845Z',
     'dateTo': '2019-03-11T09:22:13.375Z',
-    'destination': mockDestinations[0].name,
+    'destination': 4,
     'isFavorite': true,
     'offers': [],
     'type': 'restaurant'
