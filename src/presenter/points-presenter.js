@@ -30,7 +30,12 @@ export default class PointsPresenter {
     }), this.pointsBoard.getElement());
 
     for (let i = 0; i < this.tripPoints.length; i++) {
-      render(new PointView({point: this.tripPoints[i]}), this.pointsBoard.getElement());
+      render(new PointView(
+        {
+          point: this.tripPoints[i],
+          offers: this.offers.getOfferByType(this.tripPoints[i].type),
+          destination:  this.destinations.getDestinationById(this.tripPoints[i].destination)
+        }), this.pointsBoard.getElement());
     }
 
   }

@@ -1,31 +1,13 @@
 import { START_DATE_FORMAT, DATE_TIME_EVENT, TIME_EVENT } from '../const.js';
 import { createElement } from '../render.js';
 import { humanizeDate } from '../utils.js';
-import { mockOffersTypes } from '../mock/offers.js';
-
-const createAddedOffers = (point, type) => {
-  const pointTypeOffer = mockOffersTypes.find((offer) => offer.type === type);
-
-  const addedOffers = pointTypeOffer.offers.map((offer) => {
-    const checkedOffers = point.offers.includes(offer.id) ? offer.title : '';
-
-    return (
-      `${checkedOffers ? `<li class="event__offer">
-      <span class="event__offer-title">${offer.title}</span>
-      +€&nbsp;
-      <span class="event__offer-price">${offer.price}</span>
-    </li>` : ''}`);
-  }).join('');
-
-
-  return addedOffers;
-};
 
 
 const isFavoriteClassName = (isFavorite) => isFavorite ? 'event__favorite-btn--active' : '';
 
-const createPointTemplate = (point) => {
-  const { dateFrom, dateTo, type, destination, basePrice, isFavorite} = point;
+const createPointTemplate = ({ point, offers, destination }) => {
+  const { type, basePrice, dateFrom, dateTo, isFavorite } = point;
+  const { name } = destination;
 
   const humanizePointDate = humanizeDate(dateFrom, START_DATE_FORMAT);
   const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EVENT);
@@ -40,7 +22,7 @@ const createPointTemplate = (point) => {
   <div class="event__type">
     <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
   </div>
-  <h3 class="event__title">${type} ${destination}</h3>
+  <h3 class="event__title">${type} ${name}</h3>
   <div class="event__schedule">
     <p class="event__time">
       <time class="event__start-time" datetime="${dateFromEvent}T${timeFromEvent}">${timeFromEvent}</time>
@@ -55,7 +37,17 @@ const createPointTemplate = (point) => {
   </p>
   <h4 class="visually-hidden">Offers:</h4>
   <ul class="event__selected-offers">
-    ${createAddedOffers(point, type)}
+    ${offers.map((offer) => {
+      const checkedOffer = point.offers.includes(offer.id) ? offer.title : '';
+
+      return (
+        `${checkedOffer ? `<li class="event__offer">
+        <span class="event__offer-title">${offer.title}</span>
+        +€&nbsp;
+        <span class="event__offer-price">${offer.price}</span>
+      </li>` : ''}`);
+    }).join('')
+    }
   </ul>
   <button class="event__favorite-btn ${isFavoriteClassName(isFavorite)}" type="button">
     <span class="visually-hidden">Add to favorite</span>
@@ -72,12 +64,18 @@ const createPointTemplate = (point) => {
 
 
 export default class PointView {
-  constructor({ point }) {
+  constructor({ point, offers, destination }) {
     this.point = point;
+    this.offers = offers;
+    this.destination = destination;
   }
 
   getTemplate() {
-    return createPointTemplate(this.point);
+    return createPointTemplate({
+      point: this.point,
+      offers: this.offers,
+      destination: this.destination
+    });
   }
 
   getElement() {
