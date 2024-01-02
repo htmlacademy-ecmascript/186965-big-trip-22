@@ -1,5 +1,6 @@
+import AbstractView from '../framework/view/abstract-view.js';
+
 import { START_DATE_FORMAT, DATE_TIME_EVENT, TIME_EVENT } from '../const.js';
-import { createElement } from '../render.js';
 import { humanizeDate } from '../utils.js';
 
 
@@ -63,30 +64,23 @@ const createPointTemplate = ({ point, offers, destination }) => {
 };
 
 
-export default class PointView {
+export default class PointView extends AbstractView {
+  #point = null;
+  #offers = null;
+  #destination = null;
+
   constructor({ point, offers, destination }) {
-    this.point = point;
-    this.offers = offers;
-    this.destination = destination;
+    super();
+    this.#point = point;
+    this.#offers = offers;
+    this.#destination = destination;
   }
 
-  getTemplate() {
+  get template() {
     return createPointTemplate({
-      point: this.point,
-      offers: this.offers,
-      destination: this.destination
+      point: this.#point,
+      offers: this.#offers,
+      destination: this.#destination
     });
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

@@ -1,4 +1,4 @@
-import { render, RenderPosition } from './render.js';
+import { render, RenderPosition } from './framework/render.js';
 
 // View
 import FilterView from './view/filter-view.js';
