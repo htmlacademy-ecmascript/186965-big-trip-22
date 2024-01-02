@@ -6,24 +6,27 @@ import { getRandomPoint } from '../mock/points.js';
 
 
 export default class MockService {
+  #points = null;
+  #offers = null;
+  #destinations = null;
 
   constructor() {
-    this.points = Array.from({ length: POINTS__AMOUNT }, getRandomPoint);
-    this.offers = mockOffersTypes;
-    this.destinations = mockDestinations;
+    this.#points = Array.from({ length: POINTS__AMOUNT }, getRandomPoint);
+    this.#offers = mockOffersTypes;
+    this.#destinations = mockDestinations;
 
   }
 
   getPoints() {
-    return this.points;
+    return this.#points;
   }
 
 
   getOffers() {
-    return this.offers;
+    return this.#offers;
   }
 
   getDestinations() {
-    return this.destinations;
+    return this.#destinations;
   }
 }
