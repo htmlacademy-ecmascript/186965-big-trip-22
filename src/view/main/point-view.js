@@ -1,7 +1,7 @@
-import AbstractView from '../framework/view/abstract-view.js';
+import AbstractView from '../../framework/view/abstract-view.js';
 
-import { START_DATE_FORMAT, DATE_TIME_EVENT, TIME_EVENT } from '../const.js';
-import { humanizeDate } from '../utils.js';
+import { START_DATE_FORMAT, DATE_TIME_EVENT, TIME_EVENT } from '../../const.js';
+import { humanizeDate, getTripDuration } from '../../utils/point.js';
 
 
 const isFavoriteClassName = (isFavorite) => isFavorite ? 'event__favorite-btn--active' : '';
@@ -15,6 +15,8 @@ const createPointTemplate = ({ point, offers, destination }) => {
   const dateToEvent = humanizeDate(dateTo, DATE_TIME_EVENT);
   const timeFromEvent = humanizeDate(dateFrom, TIME_EVENT);
   const timeToEvent = humanizeDate(dateTo, TIME_EVENT);
+
+  const tripDuration = getTripDuration(dateFrom, dateTo);
 
   return (
     `<li class="trip-events__item">
@@ -30,7 +32,7 @@ const createPointTemplate = ({ point, offers, destination }) => {
       —
       <time class="event__end-time" datetime="${dateToEvent}T${timeToEvent}">${timeToEvent}</time>
     </p>
-    <p class="event__duration">30M</p>
+    <p class="event__duration">${tripDuration}</p>
   </div>
   <p class="event__price">
     €&nbsp;<span class="event__price-value">

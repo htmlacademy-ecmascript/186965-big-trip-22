@@ -1,4 +1,4 @@
-import AbstractView from '../framework/view/abstract-view.js';
+import AbstractView from '../../framework/view/abstract-view.js';
 
 const createTripInfoTemplate = () => `<div class="trip-info__main">
 <h1 class="trip-info__title">Amsterdam — Chamonix — Geneva</h1>

@@ -1,8 +1,8 @@
-import SortView from '../../view/sort-view.js';
-import PointListView from '../../view/point-list-view.js';
-import PointEditView from '../../view/point-edit-view.js';
-import PointView from '../../view/point-view.js';
-import NoPointsView from '../../view/no-points-view.js';
+import SortView from '../../view/main/sort-view.js';
+import PointListView from '../../view/main/point-list-view.js';
+import PointEditView from '../../view/main/point-edit-view.js';
+import PointView from '../../view/main/point-view.js';
+import NoPointsView from '../../view/main/no-points-view.js';
 
 import {render, replace} from '../../framework/render.js';
 

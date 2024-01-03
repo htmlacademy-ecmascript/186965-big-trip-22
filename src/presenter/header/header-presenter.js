@@ -1,10 +1,10 @@
 import { render, RenderPosition } from '../../framework/render.js';
 
-import TripInfoContainerView from '../../view/trip-info-container-view.js';
-import TripInfoView from '../../view/trip-info-view.js';
-import TripCostView from '../../view/trip-cost-view.js';
-import AddNewPointButtonView from '../../view/add-new-point-button-view.js';
-import FilterView from '../../view/filter-view.js';
+import TripInfoContainerView from '../../view/header/trip-info-container-view.js';
+import TripInfoView from '../../view/header/trip-info-view.js';
+import TripCostView from '../../view/header/trip-cost-view.js';
+import AddNewPointButtonView from '../../view/header/add-new-point-button-view.js';
+import FilterView from '../../view/header/filter-view.js';
 
 
 const tripControlsElement = document.querySelector('.trip-controls');

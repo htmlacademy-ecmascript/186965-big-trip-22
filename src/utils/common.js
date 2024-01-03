@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 const getRandomArrayElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const getRandomNumber = (min, max) => {
@@ -9,6 +7,5 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const humanizeDate = (date, dateFormat) => date ? dayjs(date).format(dateFormat) : '';
 
-export { getRandomArrayElement, getRandomNumber, humanizeDate };
+export { getRandomArrayElement, getRandomNumber };
