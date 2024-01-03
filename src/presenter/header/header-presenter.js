@@ -15,6 +15,7 @@ export default class HeaderPresenter {
   #points = null;
   #destinations = null;
   #tripPoints = null;
+  #pointDestinations = null;
 
   #filters = null;
 
@@ -27,6 +28,7 @@ export default class HeaderPresenter {
   init() {
     this.#tripPoints = [...this.#points.get()];
     this.#filters = generateFilter(this.#tripPoints);
+    this.#pointDestinations = this.#destinations.get();
 
     this.#renderHeader();
   }
@@ -40,7 +42,12 @@ export default class HeaderPresenter {
     }
 
     render(new TripInfoContainerView, this.#headerContainer.querySelector('.trip-main'), RenderPosition.AFTERBEGIN);
-    render(new TripInfoView, this.#headerContainer.querySelector('.trip-info'));
+
+    render(new TripInfoView({
+      points: this.#tripPoints,
+      destinations: this.#pointDestinations
+    }), this.#headerContainer.querySelector('.trip-info'));
+
     render(new TripCostView(this.#tripPoints), this.#headerContainer.querySelector('.trip-info'));
     render(new FilterView(this.#filters), this.#headerContainer.querySelector('.trip-controls__filters'));
     render(new AddNewPointButtonView, tripControlsElement, RenderPosition.AFTEREND);
