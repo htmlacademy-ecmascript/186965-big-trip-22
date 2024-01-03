@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-// import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-// import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { MINUTES_PER_DAY, MINUTES_PER_HOUR } from '../const.js';
 
 dayjs.extend(duration);
-// dayjs.extend(isSameOrAfter);
-// dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 
 const humanizeDate = (date, dateFormat) => date ? dayjs(date).format(dateFormat) : '';
 
@@ -27,4 +27,10 @@ const getTripDuration = (dateForm, dateTo) => {
 };
 
 
-export { humanizeDate, getTripDuration };
+const isFutureTrip = (dateFrom) => dayjs().isBefore(dayjs(dateFrom));
+
+const isPresentTrip = (dateFrom, dateTo) => dayjs().isSameOrBefore(dayjs(dateFrom)) && dayjs().isSameOrAfter(dayjs(dateTo));
+
+const isPastTrip = (dateTo) => dayjs().isAfter(dayjs(dateTo));
+
+export { humanizeDate, getTripDuration, isFutureTrip, isPresentTrip, isPastTrip };

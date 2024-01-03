@@ -7,7 +7,9 @@ import PointsModel from './model/points-model.js';
 import OffersModel from './model/offers-model.js';
 import DestinationsModel from './model/destinations-model.js';
 
+//mock
 import MockService from './mock/service-mock.js';
+
 
 //header
 const pageHeaderElement = document.querySelector('.page-header');
