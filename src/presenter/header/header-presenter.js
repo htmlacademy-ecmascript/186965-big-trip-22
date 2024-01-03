@@ -10,7 +10,6 @@ import { generateFilter } from '../../mock/filter.js';
 const tripControlsElement = document.querySelector('.trip-controls');
 
 
-
 export default class HeaderPresenter {
   #headerContainer = null;
   #points = null;
