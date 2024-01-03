@@ -1,9 +1,9 @@
-import AbstractView from '../framework/view/abstract-view.js';
+import AbstractView from '../../framework/view/abstract-view.js';
 
-import { humanizeDate } from '../utils.js';
-import { DATE_TIME_EDIT_EVENT, TIME_EVENT } from '../const.js';
-import { mockOffersTypes } from '../mock/offers.js';
-import { mockDestinations } from '../mock/destinations.js';
+import { humanizeDate } from '../../utils/point.js';
+import { DATE_TIME_EDIT_EVENT, TIME_EVENT } from '../../const.js';
+import { mockOffersTypes } from '../../mock/offers.js';
+import { mockDestinations } from '../../mock/destinations.js';
 
 const createEventType = () =>
   mockOffersTypes.map((item) => `<div class="event__type-item">
