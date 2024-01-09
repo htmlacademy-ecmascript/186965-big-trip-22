@@ -8,6 +8,8 @@ import {render, replace} from '../../framework/render.js';
 
 export default class PointsPresenter {
   #pointsBoard = new PointListView();
+  #sortComponent = new SortView();
+  #noPointsComponent = new NoPointsView();
   #pointsContainer = null;
   #points = null;
   #offers = null;
@@ -70,18 +72,31 @@ export default class PointsPresenter {
       replace(pointComponent, pointEditComponent);
     }
 
-
     render(pointComponent, this.#pointsBoard.element);
   }
 
+
+  #renderSort() {
+    render(this.#sortComponent, this.#pointsContainer);
+  }
+
+  #renderNoPoint() {
+    render(this.#noPointsComponent, this.#pointsContainer);
+  }
+
+  #renderPointsList() {
+    render(this.#pointsBoard, this.#pointsContainer);
+  }
+
+
   #renderPointsBoard() {
     if (!this.#tripPoints.length) {
-      render(new NoPointsView(), this.#pointsContainer);
+      this.#renderNoPoint();
       return;
     }
 
-    render(new SortView(), this.#pointsContainer);
-    render(this.#pointsBoard, this.#pointsContainer);
+    this.#renderSort();
+    this.#renderPointsList();
 
     for (let i = 0; i < this.#tripPoints.length; i++) {
       this.#renderPoint(this.#tripPoints[i]);
