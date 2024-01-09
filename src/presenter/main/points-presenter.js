@@ -1,10 +1,8 @@
 import SortView from '../../view/main/sort-view.js';
-import PointListView from '../../view/main/point-list-view.js';
-import PointEditView from '../../view/main/point-edit-view.js';
-import PointView from '../../view/main/point-view.js';
 import NoPointsView from '../../view/main/no-points-view.js';
-
-import {render, replace} from '../../framework/render.js';
+import PointListView from '../../view/main/point-list-view.js';
+import { render } from '../../framework/render.js';
+import PointPresenter from './point-presenter.js';
 
 export default class PointsPresenter {
   #pointsBoard = new PointListView();
@@ -33,46 +31,13 @@ export default class PointsPresenter {
 
 
   #renderPoint(point) {
-    const escKeyDownHandler = (evt) => {
-      if (evt.key === 'Escape') {
-        evt.preventDefault();
-        replaceFormToPoint();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    };
-
-    const pointComponent = new PointView({
-      point,
-      offers: this.#offers.getOfferByType(point.type),
-      destination: this.#destinations.getDestinationById(point.destination),
-      onEditClick: () => {
-        replacePointToForm();
-        document.addEventListener('keydown', escKeyDownHandler);
-      }
+    const pointPresenter = new PointPresenter({
+      pointsContainer: this.#pointsBoard.element,
+      offersModel: this.#offers,
+      destinationsModel: this.#destinations
     });
 
-    const pointEditComponent = new PointEditView({
-      point,
-      offers: this.#offers.getOfferByType(point.type),
-      destination: this.#destinations.getDestinationById(point.destination),
-      onFormSubmit: () => {
-        replaceFormToPoint();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      },
-      onHideBtnClick: () => {
-        replaceFormToPoint();
-      }
-    });
-
-    function replacePointToForm() {
-      replace(pointEditComponent, pointComponent);
-    }
-
-    function replaceFormToPoint() {
-      replace(pointComponent, pointEditComponent);
-    }
-
-    render(pointComponent, this.#pointsBoard.element);
+    pointPresenter.init(point);
   }
 
 
