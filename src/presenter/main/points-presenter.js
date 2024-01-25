@@ -8,7 +8,7 @@ import { updateItem } from '../../utils/common.js';
 
 export default class PointsPresenter {
   #pointsBoard = new PointListView();
-  #sortComponent = new SortView();
+  #sortComponent = null;
   #noPointsComponent = new NoPointsView();
   #pointsContainer = null;
   #offers = null;
@@ -28,9 +28,7 @@ export default class PointsPresenter {
   }
 
   init() {
-
     this.#renderPointsBoard();
-
   }
 
   #handlePointChange = (updatedPoint) => {
@@ -38,6 +36,9 @@ export default class PointsPresenter {
     this.#pointPresenters.get(updatedPoint.id).init(updatedPoint);
   };
 
+  #handleSortTypeChange = (sortType) => {
+
+  }
 
   #renderPoint(point) {
     const pointPresenter = new PointPresenter({
@@ -53,6 +54,10 @@ export default class PointsPresenter {
   }
 
   #renderSort() {
+    this.#sortComponent = new SortView({
+      onSortTypeChange: this.#handleSortTypeChange
+    });
+
     render(this.#sortComponent, this.#pointsContainer);
   }
 
