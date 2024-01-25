@@ -4,6 +4,8 @@ import PointListView from '../../view/main/point-list-view.js';
 import { render } from '../../framework/render.js';
 import PointPresenter from './point-presenter.js';
 
+import { updateItem } from '../../utils/common.js';
+
 export default class PointsPresenter {
   #pointsBoard = new PointListView();
   #sortComponent = new SortView();
@@ -13,6 +15,8 @@ export default class PointsPresenter {
   #offers = null;
   #destinations = null;
   #tripPoints = null;
+
+  #boardPoints = [];
 
   #pointPresenter = new Map();
 
@@ -42,6 +46,12 @@ export default class PointsPresenter {
     pointPresenter.init(point);
     this.#pointPresenter.set(point.id, pointPresenter);
   }
+
+  #handlePointChange = (updatePoint) => {
+    this.#boardPoints = updateItem(this.#points, updatePoint);
+    this.#pointPresenter.get(updatePoint.id).init(updatePoint);
+
+  };
 
 
   #renderSort() {
