@@ -113,7 +113,6 @@ ${createDestinationsOptions()};
 </section>
 </form>
 </li>`;
-
 };
 
 

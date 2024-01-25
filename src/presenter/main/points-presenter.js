@@ -16,7 +16,7 @@ export default class PointsPresenter {
 
   #points = [];
 
-  #pointPresenter = new Map();
+  #pointPresenters = new Map();
 
   constructor({ pointsContainer, pointsModel, offersModel, destinationsModel }) {
     this.#pointsContainer = pointsContainer;
@@ -33,25 +33,24 @@ export default class PointsPresenter {
 
   }
 
+  #handlePointChange = (updatedPoint) => {
+    this.#points = updateItem(this.#points, updatedPoint);
+    this.#pointPresenters.get(updatedPoint.id).init(updatedPoint);
+  };
+
 
   #renderPoint(point) {
     const pointPresenter = new PointPresenter({
       pointsContainer: this.#pointsBoard.element,
       offersModel: this.#offers,
       destinationsModel: this.#destinations,
-      onDataChange: this.#handlePointChange
+      onDataChange: this.#handlePointChange,
+      onModeChange: this.#handelModeChange
     });
 
     pointPresenter.init(point);
-    this.#pointPresenter.set(point.id, pointPresenter);
+    this.#pointPresenters.set(point.id, pointPresenter);
   }
-
-  #handlePointChange = (updatePoint) => {
-    this.#points = updateItem(this.#points, updatePoint);
-    this.#pointPresenter.get(updatePoint.id).init(updatePoint);
-
-  };
-
 
   #renderSort() {
     render(this.#sortComponent, this.#pointsContainer);
@@ -80,8 +79,12 @@ export default class PointsPresenter {
     }
   }
 
+  #handelModeChange = () => {
+    this.#pointPresenters.forEach((presenter) => presenter.resetView());
+  };
+
   #clearPointsList() {
-    this.#pointPresenter.forEach((presenter) => presenter.destroy());
-    this.#pointPresenter.clear();
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
+    this.#pointPresenters.clear();
   }
 }
