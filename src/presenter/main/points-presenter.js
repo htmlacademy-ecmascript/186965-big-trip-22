@@ -11,25 +11,23 @@ export default class PointsPresenter {
   #sortComponent = new SortView();
   #noPointsComponent = new NoPointsView();
   #pointsContainer = null;
-  #points = null;
   #offers = null;
   #destinations = null;
-  #tripPoints = null;
 
-  #boardPoints = [];
+  #points = [];
 
   #pointPresenter = new Map();
 
   constructor({ pointsContainer, pointsModel, offersModel, destinationsModel }) {
     this.#pointsContainer = pointsContainer;
-    this.#points = pointsModel;
+    this.#points = [...pointsModel.get()];
+
     this.#offers = offersModel;
     this.#destinations = destinationsModel;
 
   }
 
   init() {
-    this.#tripPoints = [...this.#points.get()];
 
     this.#renderPointsBoard();
 
@@ -40,7 +38,8 @@ export default class PointsPresenter {
     const pointPresenter = new PointPresenter({
       pointsContainer: this.#pointsBoard.element,
       offersModel: this.#offers,
-      destinationsModel: this.#destinations
+      destinationsModel: this.#destinations,
+      onDataChange: this.#handlePointChange
     });
 
     pointPresenter.init(point);
@@ -48,7 +47,7 @@ export default class PointsPresenter {
   }
 
   #handlePointChange = (updatePoint) => {
-    this.#boardPoints = updateItem(this.#points, updatePoint);
+    this.#points = updateItem(this.#points, updatePoint);
     this.#pointPresenter.get(updatePoint.id).init(updatePoint);
 
   };
@@ -68,7 +67,7 @@ export default class PointsPresenter {
 
 
   #renderPointsBoard() {
-    if (!this.#tripPoints.length) {
+    if (!this.#points.length) {
       this.#renderNoPoint();
       return;
     }
@@ -76,8 +75,8 @@ export default class PointsPresenter {
     this.#renderSort();
     this.#renderPointsList();
 
-    for (let i = 0; i < this.#tripPoints.length; i++) {
-      this.#renderPoint(this.#tripPoints[i]);
+    for (let i = 0; i < this.#points.length; i++) {
+      this.#renderPoint(this.#points[i]);
     }
   }
 

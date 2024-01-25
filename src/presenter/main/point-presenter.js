@@ -14,10 +14,13 @@ export default class PointPresenter {
   #pointComponent = null;
   #pointEditComponent = null;
 
-  constructor({ pointsContainer, offersModel, destinationsModel }) {
+  #handleDataChange = null;
+
+  constructor({ pointsContainer, offersModel, destinationsModel, onDataChange }) {
     this.#pointsContainer = pointsContainer;
     this.#offers = offersModel;
     this.#destinations = destinationsModel;
+    this.#handleDataChange = onDataChange;
   }
 
 
@@ -31,7 +34,8 @@ export default class PointPresenter {
       point: this.#point,
       offers: this.#offers.getOfferByType(point.type),
       destination: this.#destinations.getDestinationById(point.destination),
-      onEditClick: this.#handleEditClick
+      onEditClick: this.#handleEditClick,
+      onFavoriteClick: this.#handleFavoriteClick,
     });
 
 
@@ -55,7 +59,7 @@ export default class PointPresenter {
       replace(this.#pointComponent, prevPointComponent);
     }
 
-    if (this.#pointEditComponent.contains(prevPointEditComponent.element)) {
+    if (this.#pointsContainer.contains(prevPointEditComponent.element)) {
       replace(this.#pointEditComponent, prevPointEditComponent);
     }
 
@@ -78,11 +82,16 @@ export default class PointPresenter {
     document.removeEventListener('keydown', this.#escKeyDownHandler);
   }
 
+  #handleFavoriteClick = () => {
+    this.#handleDataChange({ ...this.#point, isFavorite: !this.#point.isFavorite });
+  };
+
   #handleEditClick = () => {
     this.#replacePointToForm();
   };
 
-  #handleFormSubmit = () => {
+  #handleFormSubmit = (point) => {
+    this.#handleDataChange(point);
     this.#replaceFormToPoint();
   };
 
@@ -92,5 +101,4 @@ export default class PointPresenter {
       this.#replaceFormToPoint();
     }
   };
-
 }
