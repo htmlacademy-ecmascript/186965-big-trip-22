@@ -33,4 +33,36 @@ const isPresentTrip = (dateFrom, dateTo) => dayjs().isSameOrBefore(dayjs(dateFro
 
 const isPastTrip = (dateTo) => dayjs().isAfter(dayjs(dateTo));
 
-export { humanizeDate, getTripDuration, isFutureTrip, isPresentTrip, isPastTrip };
+
+const getWeightForNullDate = (dateA, dateB) => {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+};
+
+const sortPointsByDay = (pointA, pointB) => {
+  const weight = getWeightForNullDate(pointA.dateTo, pointB.dateTo);
+
+  return weight ?? dayjs(pointA.dateTo).diff(dayjs(pointB.dateTo));
+};
+
+const sortPointsByTime = (pointA, pointB) => {
+  const pointATime = getTripDatesDifference(pointA.dateFrom, pointA.dateTo);
+  const pointBTime = getTripDatesDifference(pointB.dateFrom, pointB.dateTo);
+
+  return pointATime - pointBTime;
+};
+
+const sortPointsByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
+
+export { humanizeDate, getTripDuration, isFutureTrip, isPresentTrip, isPastTrip, sortPointsByDay, sortPointsByPrice, sortPointsByTime};
