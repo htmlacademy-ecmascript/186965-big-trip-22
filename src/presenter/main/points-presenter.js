@@ -5,7 +5,7 @@ import { render } from '../../framework/render.js';
 import PointPresenter from './point-presenter.js';
 
 import { updateItem } from '../../utils/common.js';
-import { sortPointsByDay, sortPointsByPrice, sortPointsByTime } from '../../utils/point.js';
+import { sortPointsByPrice, sortPointsByTime } from '../../utils/point.js';
 import { SortType } from '../../const.js';
 
 export default class PointsPresenter {
