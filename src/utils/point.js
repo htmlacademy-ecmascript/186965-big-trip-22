@@ -10,7 +10,7 @@ dayjs.extend(isSameOrBefore);
 
 const humanizeDate = (date, dateFormat) => date ? dayjs(date).format(dateFormat) : '';
 
-const getTripDatesDifference = (dateFrom, dateTo) => (dayjs(dateTo).diff(dateFrom)) / 60000;
+const getTripDatesDifference = (dateFrom, dateTo) => Math.floor((dayjs(dateTo).diff(dateFrom))) / 60000;
 
 
 const getTripDuration = (dateForm, dateTo) => {
@@ -56,12 +56,14 @@ const sortPointsByDay = (pointA, pointB) => {
   return weight ?? dayjs(pointA.dateTo).diff(dayjs(pointB.dateTo));
 };
 
+
 const sortPointsByTime = (pointA, pointB) => {
-  const pointATime = getTripDatesDifference(pointA.dateFrom, pointA.dateTo);
-  const pointBTime = getTripDatesDifference(pointB.dateFrom, pointB.dateTo);
+  const pointATime = getTripDatesDifference(pointA.dateTo, pointA.dateFrom);
+  const pointBTime = getTripDatesDifference(pointB.dateTo, pointB.dateFrom);
 
   return pointATime - pointBTime;
 };
+
 
 const sortPointsByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
 
