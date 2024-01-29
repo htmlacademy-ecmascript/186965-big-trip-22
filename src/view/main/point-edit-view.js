@@ -156,6 +156,16 @@ export default class PointEditView extends AbstractStatefulView {
     this.#handleFormHideBtnClick();
   };
 
+  #eventChangeHandler = (evt) => {
+    evt.preventDefault();
+
+    this.updateElement({
+      point: {
+        type: evt.target.value
+      }
+    });
+  };
+
   static parsePointToState(point) {
     return {...point};
   }
@@ -164,4 +174,6 @@ export default class PointEditView extends AbstractStatefulView {
     return {...state};
 
   }
+
+  _restoreHandlers() {}
 }
