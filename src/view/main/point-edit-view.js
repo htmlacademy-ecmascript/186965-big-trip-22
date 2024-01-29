@@ -1,4 +1,4 @@
-import AbstractView from '../../framework/view/abstract-view.js';
+import AbstractStatefulView from '../../framework/view/abstract-stateful-view.js';
 
 import { humanizeDate } from '../../utils/point.js';
 import { DATE_TIME_EDIT_EVENT, TIME_EVENT } from '../../const.js';
@@ -16,8 +16,8 @@ const createDestinationsOptions = () =>
   mockDestinations.map(({ name }) => `<option value="${name}"></option>`).join('');
 
 
-const createPointEditTemplate = ({point, offers, destination }) => {
-  const { type, basePrice, dateFrom, dateTo } = point;
+const createPointEditTemplate = ({state, offers, destination }) => {
+  const { type, basePrice, dateFrom, dateTo } = state.point;
 
   const dateFromEvent = humanizeDate(dateFrom, DATE_TIME_EDIT_EVENT);
   const dateToEvent = humanizeDate(dateTo, DATE_TIME_EDIT_EVENT);
@@ -80,7 +80,7 @@ ${createDestinationsOptions()};
     <h3 class="event__section-title  event__section-title--offers">Offers</h3>
     <div class="event__available-offers">
     ${offers.map((offer) => {
-    const checkedOffer = point.offers.includes(offer.id) ? 'checked' : '';
+    const checkedOffer = state.point.offers.includes(offer.id) ? 'checked' : '';
 
     return `<div class="event__offer-selector">
             <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.title}" type="checkbox" name="event-offer-${offer.title}" ${checkedOffer}>
@@ -116,7 +116,7 @@ ${createDestinationsOptions()};
 };
 
 
-export default class PointEditView extends AbstractView {
+export default class PointEditView extends AbstractStatefulView {
   #point = null;
   #offers = null;
   #destination = null;
@@ -126,20 +126,21 @@ export default class PointEditView extends AbstractView {
 
   constructor({ point, offers, destination, onFormSubmit, onHideBtnClick }) {
     super();
-    this.#point = point;
+    this._setState(PointEditView.parsePointToState({point}));
     this.#offers = offers;
     this.#destination = destination;
 
     this.#handleFormSubmit = onFormSubmit;
-    this.element.querySelector('.event').addEventListener('submit', this.#formSubmitHandler);
-
     this.#handleFormHideBtnClick = onHideBtnClick;
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#hideFormBtnClickHandler);
+
+    this._restoreHandlers();
+
+
   }
 
   get template() {
     return createPointEditTemplate({
-      point: this.#point,
+      state: this._state,
       offers: this.#offers,
       destination: this.#destination
     });
@@ -147,11 +148,29 @@ export default class PointEditView extends AbstractView {
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#handleFormSubmit(this.#point);
+    this.#handleFormSubmit(PointEditView.parseStateToPoint(this._state));
   };
 
   #hideFormBtnClickHandler = (evt) => {
     evt.preventDefault();
     this.#handleFormHideBtnClick();
   };
+
+  #eventChangeHandler = (evt) => {
+    this.updateElement({
+      point: {
+        ...this._state.point,
+        type: evt.target.value
+      }
+    });
+  };
+
+  static parsePointToState = (point) => point;
+  static parseStateToPoint = (state) => state.point;
+
+  _restoreHandlers() {
+    this.element.querySelector('.event').addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#hideFormBtnClickHandler);
+    this.element.querySelector('.event__type-group').addEventListener('change', this.#eventChangeHandler);
+  }
 }
