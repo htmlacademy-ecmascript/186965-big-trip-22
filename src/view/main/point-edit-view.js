@@ -1,4 +1,4 @@
-import AbstractView from '../../framework/view/abstract-view.js';
+import AbstractStatefulView from '../../framework/view/abstract-stateful-view.js';
 
 import { humanizeDate } from '../../utils/point.js';
 import { DATE_TIME_EDIT_EVENT, TIME_EVENT } from '../../const.js';
@@ -116,7 +116,7 @@ ${createDestinationsOptions()};
 };
 
 
-export default class PointEditView extends AbstractView {
+export default class PointEditView extends AbstractStatefulView {
   #point = null;
   #offers = null;
   #destination = null;
@@ -126,7 +126,8 @@ export default class PointEditView extends AbstractView {
 
   constructor({ point, offers, destination, onFormSubmit, onHideBtnClick }) {
     super();
-    this.#point = point;
+    // this.#point = point;
+    this._setState(PointEditView.parsePointToState(point));
     this.#offers = offers;
     this.#destination = destination;
 
@@ -139,7 +140,7 @@ export default class PointEditView extends AbstractView {
 
   get template() {
     return createPointEditTemplate({
-      point: this.#point,
+      point: this._state,
       offers: this.#offers,
       destination: this.#destination
     });
@@ -147,11 +148,20 @@ export default class PointEditView extends AbstractView {
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#handleFormSubmit(this.#point);
+    this.#handleFormSubmit(PointEditView.parseStateToPoint(this._state));
   };
 
   #hideFormBtnClickHandler = (evt) => {
     evt.preventDefault();
     this.#handleFormHideBtnClick();
   };
+
+  static parsePointToState(point) {
+    return {...point};
+  }
+
+  static parseStateToPoint(state) {
+    return {...state};
+
+  }
 }
